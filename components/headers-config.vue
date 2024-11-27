@@ -8,8 +8,8 @@
       <div class="w-8" v-if="!disabled">
         <el-switch
           v-model="headerItem.status"
-          active-value="enabled"
-          inactive-value="disabled"
+          :active-value="STATUS_GLOBAL_ENUM.启用"
+          :inactive-value="STATUS_GLOBAL_ENUM.停用"
           :disabled="disabled"
         />
       </div>
@@ -68,6 +68,7 @@
 </template>
 
 <script lang="ts" setup>
+import { STATUS_GLOBAL_ENUM } from "@/types";
 import { Plus, Remove } from "@element-plus/icons-vue";
 
 interface HeaderItem {

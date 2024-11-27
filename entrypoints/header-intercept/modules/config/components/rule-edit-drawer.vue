@@ -283,7 +283,8 @@ const handleFormChange = (key: keyof typeof form.value) => {
 
 // 校验匹配类型的值
 const validateMatchType = (_rule: any, value: string, callback: Function) => {
-  const isDomain = form.value.matchType === MATCH_TYPE_ENUM.域名;
+  const isDomain = [MATCH_TYPE_ENUM.域名, MATCH_TYPE_ENUM.网址前缀].includes(form.value.matchType);
+
   if (!isDomain) {
     callback();
   }
@@ -340,11 +341,9 @@ const submitForm = async (formEl: FormInstance | undefined) => {
     case "create":
     case "clone":
       const formData = cloneDeep(form.value);
-      // headerSettingHelper.createRule(activeGroupId.value, formData);
       createRule(activeGroupId.value, formData);
       break;
     case "edit":
-      // headerSettingHelper.editRule(activeGroupId.value, form.value);
       editRule(activeGroupId.value, form.value);
       break;
     case "detail":
@@ -360,6 +359,12 @@ const open = async (type: ActionType, item?: HeaderRuleItem) => {
 
   await nextTick();
   formRef.value?.resetFields();
+
+  // fix: 部分表单项未重置的问题
+  form.value.id = '';
+  form.value.state = STATUS_GLOBAL_ENUM.启用;
+  form.value.headersConfig = [];
+  form.value.includeConfig = "";
 
   if (item) {
     const formData = cloneDeep(item);

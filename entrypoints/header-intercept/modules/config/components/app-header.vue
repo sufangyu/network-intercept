@@ -11,7 +11,7 @@
     <div class="app-header__right">
       <el-switch
         v-model="headerInterceptConfig.toggle"
-        size="large"
+        size="default"
         inline-prompt
         active-text="启用"
         inactive-text="停用"
