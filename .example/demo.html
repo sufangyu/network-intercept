@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {}
+  </script>
+  <style type="text/tailwindcss">
+    .button {
+      @apply pointer-events-auto rounded-md px-4 py-1 text-center text-sm font-medium shadow-sm ring-1 ring-slate-700/10 hover:bg-slate-50;
+    }
+  </style>
+</head>
+<body>
+  <section class="p-4">
+    <h1 class="mb-2">请求拦截</h1>
+    <div class="flex gap-2">
+      <button class="button" id="blockRequest">阻止请求</button>
+      <button class="button" id="redirectRequest">重定向请求</button>
+      <button class="button" id="modifyRequestHeader">修改请求头</button>
+      <button class="button" id="modifyResponseHeader">修改响应头</button>
+    </div>
+  </section>
+
+  <section class="p-4">
+    <h1 class="mb-2">Mock 数据</h1>
+    <div class="flex gap-2 mb-3">
+      <button class="button" id="normalGetRequest">常规-GET请求</button>
+      <button class="button" id="normalPostRequest">常规-POST请求</button>
+      <button class="button" id="normalPutRequest">常规-PUT请求</button>
+      <button class="button" id="normalDeleteRequest">常规-DELETE请求</button>
+      <button class="button" id="normalPatchRequest">常规-PATCH请求</button>
+    </div>
+    <div class="flex gap-2 mb-3">
+      <button class="button" id="redirectGetRequest">重定向-GET请求</button>
+      <button class="button" id="baseApiPartData">数据包裹-返回业务响应</button>
+      <button class="button" id="baseApiFullData">数据包裹-返回完整响应</button>
+    </div>
+  </section>
+
+  <script src="./header.js"></script>
+  <script src="./mock.js"></script>
+</body>
+</html>
