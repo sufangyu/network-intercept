@@ -1,18 +1,18 @@
-import { ElMessage, FormInstance } from 'element-plus';
-import { cloneDeep } from 'lodash-es';
+import { FormInstance } from 'element-plus';
 import { nanoid } from 'nanoid';
+import { STATUS_GLOBAL_ENUM } from '@/types';
 import {
   DELAY_TIME_ENUM,
   MATCH_TYPE_ENUM,
   MOCK_TYPE_ENUM,
   MockRuleItem,
   ResponseGroupItem,
-  ResponseProject,
   ResponseProjectItem
 } from '../types';
-import { STATUS_GLOBAL_ENUM } from '@/types';
-import { STORAGE_KEY_RESPONSE_MOCK } from '../const';
 import { responseProject } from '../data';
+import { useUpdateStorage } from './use-update-storage';
+
+const { updateStorage } = useUpdateStorage();
 
 export function useResponseMock() {
   const formRef = ref<FormInstance>();
@@ -82,8 +82,8 @@ export function useResponseMock() {
       // 更新数组的值
       const curRuleItem = curGroup.mockRules![curMockRuleIdx!];
       curGroup.mockRules![curMockRuleIdx!] = {
-        ...item,
-        responseHeaders: curRuleItem.responseHeaders ?? []
+        responseHeaders: curRuleItem.responseHeaders ?? [],
+        ...item
       };
 
       await updateStorage({
@@ -169,32 +169,3 @@ export function useResponseMock() {
     editMockRule
   };
 }
-
-/**
- * 更新项目数据到本地
- *
- */
-const updateStorage = async (options: {
-  data: ResponseProject;
-  resultMessage?: {
-    silent?: boolean;
-    message?: string;
-    type?: 'success' | 'error';
-  };
-}) => {
-  const { data, resultMessage } = options;
-  const silent = resultMessage?.silent ?? false;
-
-  // 转成字符串在存储, 避免数组类型存储后会转成对象
-  const newData = cloneDeep(data);
-  const dataStr = JSON.stringify(newData);
-  await storage.setItem(STORAGE_KEY_RESPONSE_MOCK, dataStr);
-
-  if (!silent && resultMessage?.message) {
-    ElMessage({
-      message: resultMessage?.message,
-      type: resultMessage?.type || 'success',
-      grouping: true
-    });
-  }
-};

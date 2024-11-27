@@ -29,15 +29,15 @@ export const interceptorRequest = async () => {
     interceptor.on('response', async ({ request, response }) => {
       const mockType = response.headers.get(MOCK_HEADER_KEY_MAP.模拟类型);
 
-      // 常规 Mock
-      // 不能使用`TS`的枚举, 否则会报错
-      if (mockType === 'normal') {
-        const resData = await response.json();
-        const headersObj = Array.from(response.headers.entries()).reduce((acc, [key, value]) => {
-          acc[key] = value;
-          return acc;
-        }, {} as Record<string, string>);
+      const resData = await response.json();
+      const headersObj = Array.from(response.headers.entries()).reduce((acc, [key, value]) => {
+        acc[key] = value;
+        return acc;
+      }, {} as Record<string, string>);
 
+      // 常规 Mock
+      // 注意: 不能使用`TS`的枚举, 否则会报错
+      if (mockType === 'normal') {
         console.log(
           `%c[${getExtensionName}]%c${request.method}`,
           pluginStyleScoped,
@@ -50,6 +50,23 @@ export const interceptorRequest = async () => {
           '响应数据:',
           resData
         );
+      } else {
+        const isRedirect = mockType === 'redirect';
+        const redirectUrl = response.headers.get(MOCK_HEADER_KEY_MAP.重定向目标);
+
+        isRedirect &&
+          console.log(
+            `%c[${getExtensionName}]%c${request.method}`,
+            pluginStyleScoped,
+            scopedStyle,
+            `${request.url} => ${redirectUrl}`,
+            '\n',
+            '响应头:',
+            headersObj,
+            '\n',
+            '响应数据:',
+            resData
+          );
       }
 
       // 显示 toast

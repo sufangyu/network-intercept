@@ -17,8 +17,8 @@
         v-model="responseProject.toggle"
         size="default"
         inline-prompt
-        active-text="开启"
-        inactive-text="关闭"
+        active-text="启用"
+        inactive-text="停用"
         @change="toggleProjectMockOrToast('mock')"
       />
 

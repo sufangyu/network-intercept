@@ -64,13 +64,24 @@ export const getMockRespponse = async (
         headers: request.headers,
         body: request.body
       });
-      mockResponse.headers.set(MOCK_HEADER_KEY_MAP.模拟类型, 'redirect');
-      mockResponse.headers.set(MOCK_HEADER_KEY_MAP.重定向来源, request.url);
-      mockResponse.headers.set(
+
+      // 创建并返回新的响应对象
+      const customHeaders = new Headers(mockResponse.headers);
+      customHeaders.set(MOCK_HEADER_KEY_MAP.模拟类型, 'redirect');
+      customHeaders.set(MOCK_HEADER_KEY_MAP.重定向来源, request.url);
+      customHeaders.set(MOCK_HEADER_KEY_MAP.重定向目标, matchMockRule.redirectUrl!);
+      customHeaders.set(
         MOCK_HEADER_KEY_MAP.是否显示Toast,
         responseMockProject?.toast ? 'yes' : 'no'
       );
 
+      const responseWithCustomHeaders = new Response(await mockResponse.text(), {
+        status: mockResponse.status,
+        statusText: mockResponse.statusText,
+        headers: customHeaders
+      });
+
+      mockResponse = responseWithCustomHeaders;
       break;
   }
 

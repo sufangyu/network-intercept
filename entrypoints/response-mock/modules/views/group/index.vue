@@ -2,10 +2,16 @@
   <AppHeader :project="curProject" @operate="handleOperate" />
 
   <el-scrollbar class="main-content">
-    <!-- <p>{{ activeGroupId ?? "-" }}</p>
-    <p>{{ curGroup }}</p> -->
+    <!-- <p>{{ activeGroupId ?? "-" }}</p> -->
+    <!-- <p>{{ curGroup }}</p> -->
 
-    <el-tabs v-model="activeGroupId" type="card" closable @tab-remove="handleDeleteGroup">
+    <el-tabs
+      v-if="(curProject?.groupList ?? []).length > 0"
+      v-model="activeGroupId"
+      type="card"
+      closable
+      @tab-remove="handleDeleteGroup"
+    >
       <el-tab-pane
         v-for="item in curProject?.groupList ?? []"
         :key="item.id"
@@ -84,7 +90,7 @@
           </template>
         </el-table-column>
 
-        <el-table-column label="接口地址" min-width="420">
+        <el-table-column label="接口地址" min-width="520">
           <template #default="{ row }: { row: MockRuleItem }">
             <template v-if="row.mockType === MOCK_TYPE_ENUM.重定向">
               <div class="flex items-center">
@@ -195,7 +201,6 @@ import EditorDialog from "./components/editor-dialog.vue";
 import MockEditorDrawer from "./components/mock-editor-drawer.vue";
 
 const $route = useRoute();
-
 const { responseProject, getProjectList } = useResponseMockProject();
 const { activeGroupId, setActiveGroupId, deleteGroup } = useResponseMockGroup();
 const { deleteMockRule, deleteAllMockRule, toggleMockRuleStatus } = useResponseMock();

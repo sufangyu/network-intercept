@@ -80,14 +80,13 @@
         </div>
         <div class="flex justify-between items-center mb-3">
           <h3 class="text-lg">{{ projectItem.name || "-" }}</h3>
-          <el-tag>
+          <el-tag :type="projectItem.status === STATUS_GLOBAL_ENUM.停用 ? 'danger' : ''">
             {{ getEnumKeyByValue(STATUS_GLOBAL_ENUM, projectItem.status) }}
           </el-tag>
         </div>
         <p class="line-clamp-2 text-gray-500">
           {{ projectItem.description || "-" }}
           <!--  - {{ projectItem.id }} -->
-          - {{ projectItem.responseDataBase }}
         </p>
       </div>
     </section>

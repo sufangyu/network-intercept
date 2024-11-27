@@ -50,9 +50,12 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   dialogVisible.value = false;
 };
 
-const open = (item?: HeaderInterceptGroupItem) => {
+const open = async (item?: HeaderInterceptGroupItem) => {
   dialogVisible.value = true;
+
+  await nextTick();
   formRef.value?.resetFields();
+  form.value.id = "";
 
   if (item) {
     form.value = { ...item };

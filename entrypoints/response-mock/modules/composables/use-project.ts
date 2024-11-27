@@ -1,10 +1,13 @@
+import { nanoid } from 'nanoid';
+import { ElMessage } from 'element-plus';
 import { STATUS_GLOBAL_ENUM } from '@/types';
 import { ResponseProject, ResponseProjectItem } from '../types';
 import { STORAGE_KEY_RESPONSE_MOCK } from '../const';
 import { responseProject } from '../data';
-import { cloneDeep } from 'lodash-es';
-import { ElMessage } from 'element-plus';
-import { nanoid } from 'nanoid';
+
+import { useUpdateStorage } from './use-update-storage';
+
+const { updateStorage } = useUpdateStorage();
 
 export function useResponseMockProject() {
   /**
@@ -30,7 +33,7 @@ export function useResponseMockProject() {
     let message = '';
     switch (type) {
       case 'mock':
-        message = responseProject.value?.toggle ? 'Mock 已开启' : 'Mock 已关闭';
+        message = responseProject.value?.toggle ? 'Mock 已启用' : 'Mock 已停用';
         break;
       case 'toast':
         message = responseProject.value?.toast ? 'Toast 提示已开启' : 'Toast 提示已关闭';
@@ -163,32 +166,3 @@ export function useResponseMockProject() {
     toggleProjectCollected
   };
 }
-
-/**
- * 更新项目数据到本地
- *
- */
-const updateStorage = async (options: {
-  data: ResponseProject;
-  resultMessage?: {
-    silent?: boolean;
-    message?: string;
-    type?: 'success' | 'error';
-  };
-}) => {
-  const { data, resultMessage } = options;
-  const silent = resultMessage?.silent ?? false;
-
-  // 转成字符串在存储, 避免数组类型存储后会转成对象
-  const newData = cloneDeep(data);
-  const dataStr = JSON.stringify(newData);
-  await storage.setItem(STORAGE_KEY_RESPONSE_MOCK, dataStr);
-
-  if (!silent && resultMessage?.message) {
-    ElMessage({
-      message: resultMessage?.message,
-      type: resultMessage?.type || 'success',
-      grouping: true
-    });
-  }
-};

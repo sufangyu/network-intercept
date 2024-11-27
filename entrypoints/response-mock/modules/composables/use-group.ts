@@ -1,9 +1,11 @@
 import { ElMessage, FormInstance } from 'element-plus';
 import { responseProject } from '../data';
-import type { ResponseGroupItem, ResponseProject, ResponseProjectItem } from '../types';
+import type { ResponseGroupItem, ResponseProjectItem } from '../types';
 import { nanoid } from 'nanoid';
-import { STORAGE_KEY_RESPONSE_MOCK } from '../const';
 import { cloneDeep } from 'lodash-es';
+import { useUpdateStorage } from './use-update-storage';
+
+const { updateStorage } = useUpdateStorage();
 
 /** 当前激活的分组ID */
 const activeGroupId = ref('');
@@ -150,32 +152,3 @@ export function useResponseMockGroup() {
     deleteGroup
   };
 }
-
-/**
- * 更新项目数据到本地
- *
- */
-const updateStorage = async (options: {
-  data: ResponseProject;
-  resultMessage?: {
-    silent?: boolean;
-    message?: string;
-    type?: 'success' | 'error';
-  };
-}) => {
-  const { data, resultMessage } = options;
-  const silent = resultMessage?.silent || false;
-
-  // 转成字符串在存储, 避免数组类型存储后会转成对象
-  const newData = cloneDeep(data);
-  const dataStr = JSON.stringify(newData);
-  await storage.setItem(STORAGE_KEY_RESPONSE_MOCK, dataStr);
-
-  if (!silent && resultMessage?.message) {
-    ElMessage({
-      message: resultMessage?.message,
-      type: resultMessage?.type || 'success',
-      grouping: true
-    });
-  }
-};
