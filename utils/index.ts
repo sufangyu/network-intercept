@@ -61,7 +61,6 @@ export const formatObjectTabIndent = (data: string, indenTabIndent = 2) => {
   }
 
   const formatData = JSON.parse(data);
-  console.log(formatData, isObject(formatData));
   return isObject(formatData) ? JSON.stringify(formatData, null, indenTabIndent) : data;
 };
 

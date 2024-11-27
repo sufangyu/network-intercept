@@ -49,6 +49,8 @@
         </div>
       </div>
 
+      <!-- {{ curGroup.mockRules }} -->
+
       <el-table
         class="mt-4"
         border

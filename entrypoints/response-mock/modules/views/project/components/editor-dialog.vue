@@ -24,7 +24,7 @@
       </el-form-item>
 
       <el-form-item
-        label="API基础数据"
+        label="API基础数据结构包裹"
         prop="responseDataBase"
         :rules="[{ validator: validateResponseBase, trigger: 'blur' }]"
       >
@@ -34,7 +34,7 @@
             <el-tooltip effect="dark" placement="right">
               <template #content>
                 <p class="w-[360px]">
-                  统一添加一层数据包装，例如：<br />
+                  统一添加一层数据结构包裹，例如：<br />
                   {<br />
                   &nbsp;&nbsp;&nbsp;&nbsp;"code": 200, <br />
                   &nbsp;&nbsp;&nbsp;&nbsp;"message": "Operation successful",<br />

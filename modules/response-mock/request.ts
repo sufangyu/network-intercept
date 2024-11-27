@@ -29,6 +29,10 @@ export const interceptorRequest = async () => {
     interceptor.on('response', async ({ request, response }) => {
       const mockType = response.headers.get(MOCK_HEADER_KEY_MAP.模拟类型);
 
+      if (!mockType) {
+        return;
+      }
+
       const resData = await response.json();
       const headersObj = Array.from(response.headers.entries()).reduce((acc, [key, value]) => {
         acc[key] = value;
@@ -39,7 +43,7 @@ export const interceptorRequest = async () => {
       // 注意: 不能使用`TS`的枚举, 否则会报错
       if (mockType === 'normal') {
         console.log(
-          `%c[${getExtensionName}]%c${request.method}`,
+          `%c[${getExtensionName}]%c${request.method}-${response.status}`,
           pluginStyleScoped,
           scopedStyle,
           request.url,
@@ -56,10 +60,10 @@ export const interceptorRequest = async () => {
 
         isRedirect &&
           console.log(
-            `%c[${getExtensionName}]%c${request.method}`,
+            `%c[${getExtensionName}]%c${request.method}-${response.status}`,
             pluginStyleScoped,
             scopedStyle,
-            `${request.url} => ${redirectUrl}`,
+            `${request.url} -> ${redirectUrl}`,
             '\n',
             '响应头:',
             headersObj,

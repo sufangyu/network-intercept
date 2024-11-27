@@ -35,7 +35,6 @@ export const getMockRespponse = async (
         curResponseData = wrapResponseData(curResponseData, matchMockRule.responseDataBase);
       }
 
-      // status、statusText、headers
       const status = matchMockRule.responseState || 200;
       const statusText = matchMockRule.responseStateText || 'OK';
       const headers = new Headers({
@@ -176,7 +175,7 @@ const wrapResponseData = (rawResponse: string, responseDataBase: string) => {
 
           if (curBaseVal === null) {
             // 值为 null时 => 替换为响应数据的对应层级的数据, 不存在对应层级则直接替换为响应数据
-            dataBase[key] = curResVal ?? rawResponse;
+            dataBase[key] = curResVal ?? JSON.parse(rawResponse);
           } else if (typeof curBaseVal === 'object') {
             // 值是对象或数组时 => 递归处理
             const nextResponse = curResVal ?? response;
@@ -190,7 +189,7 @@ const wrapResponseData = (rawResponse: string, responseDataBase: string) => {
     };
 
     if (responseDataBase === 'null' || !responseDataBase || !rawResponse) {
-      return rawResponse;
+      return JSON.parse(rawResponse);
     }
 
     const formatResponseDataBase = JSON.parse(responseDataBase);
