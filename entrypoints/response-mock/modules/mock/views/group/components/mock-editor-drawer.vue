@@ -233,13 +233,13 @@ const validateHeadersConfig = (_rule: any, _value: any, callback: Function) => {
 const handleMockTypeChange = () => {
   switch (form.value.mockType) {
     case MOCK_TYPE_ENUM.常规:
-      form.value.responseState = 200;
+      form.value.responseState = '200';
       form.value.delayTime = DELAY_TIME_ENUM["500ms"];
-      form.value.redirectUrl = "";
+      form.value.redirectUrl = '';
       break;
     case MOCK_TYPE_ENUM.重定向:
-      form.value.responseState = 200;
-      form.value.responseData = "";
+      form.value.responseState = '200';
+      form.value.responseData = '';
       form.value.delayTime = DELAY_TIME_ENUM.无延迟;
       break;
   }
@@ -323,8 +323,7 @@ defineExpose({
 
 .codemirror-editor {
   border: 1px solid #d9d9d9;
-  border-radius: 6px;
-  outline: none;
+  @apply outline-0 rounded-md dark:border-[#4C4D4F];
 
   :deep(.cm-focused) {
     outline: none;
@@ -332,6 +331,14 @@ defineExpose({
 
   :deep(.cm-editor) {
     height: calc(100vh - 290px);
+  }
+
+  :deep(.cm-gutters) {
+    @apply dark:bg-[#262727] dark:border-[#4C4D4F];
+  }
+
+  :deep(.cm-activeLineGutter) {
+    @apply dark:bg-[#225887] dark:text-white;
   }
 }
 

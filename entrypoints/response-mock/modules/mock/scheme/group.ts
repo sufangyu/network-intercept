@@ -33,7 +33,7 @@ export const mockRuleItemSchema = z.object({
   matchType: matchTypeEnumSchema,
   methodType: z.union([methodTypeEnumSchema, z.literal('')]),
   redirectUrl: z.string().optional(),
-  responseState: z.number().optional(),
+  responseState: z.string().optional(),
   responseStateText: z.string().optional(),
   delayTime: delayTimeEnumSchema.optional(),
   responseData: z.string().optional(),

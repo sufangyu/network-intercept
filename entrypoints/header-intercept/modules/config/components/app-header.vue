@@ -42,7 +42,7 @@
 
 <script lang="ts" setup>
 import { MoreFilled, QuestionFilled } from "@element-plus/icons-vue";
-import IconHeader from "~/assets/header.svg";
+import IconHeader from "~/assets/images/logo/header.svg";
 import { HEADER_INTERCEPT_APP_HEADER_OPERATE_ENUM } from "../types";
 import { useHeaderIntercept } from "../composables";
 
@@ -60,7 +60,8 @@ const handleOperate = (type: HEADER_INTERCEPT_APP_HEADER_OPERATE_ENUM) => {
 <style lang="scss" scoped>
 .app-header {
   @apply flex items-center justify-between p-[16px]
-    h-[64px] text-white bg-[#001529] text-sm;
+    h-[64px] text-white bg-[#001529] text-sm
+    dark:bg-[#010101];
 
   &__right {
     @apply flex items-center gap-4;

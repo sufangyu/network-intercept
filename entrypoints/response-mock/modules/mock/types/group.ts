@@ -111,10 +111,10 @@ export interface MockRuleItem {
    *
    * - 默认 200
    *
-   * @type {number}
+   * @type {string}
    * @memberof MockRuleItem
    */
-  responseState?: number;
+  responseState?: string;
   /**
    * 响应状态描述
    *

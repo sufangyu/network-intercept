@@ -19,6 +19,7 @@
               'justify-center',
               'items-center',
               'text-sm',
+              'dark:bg-[#2C9DFB]',
             ]"
           >
             {{ projectItem.name?.[0]?.toUpperCase() || "-" }}
@@ -163,9 +164,10 @@ const handleExportProjectConfig = (projectItem: ResponseProjectItem) => {
 <style lang="scss" scoped>
 .main-content {
   height: calc(100vh - 64px);
-  @apply bg-[#f5f5f5];
+  @apply bg-[#f5f5f5] dark:bg-[#141414];
 }
 .project-item {
-  @apply bg-white p-4 box-border rounded-[6px] hover:shadow-md cursor-pointer;
+  @apply bg-white p-4 box-border rounded-[6px] hover:shadow-md cursor-pointer
+  dark:bg-[#262727];
 }
 </style>

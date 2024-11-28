@@ -1,7 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import Project from '../modules/views/project/index.vue';
-import Group from '../modules/views/group/index.vue';
-// import GroupOld from '../views/group/index.vue';
+import Project from '../modules/mock/views/project/index.vue';
+import Group from '../modules/mock/views/group/index.vue';
 
 const routes = [
   {
@@ -9,8 +8,7 @@ const routes = [
     redirect: { name: 'Project' }
   },
   { path: '/project', component: Project, name: 'Project' },
-  { path: '/group/:id', component: Group, name: 'Group' },
-  // { path: '/group-old', component: GroupOld, name: 'GroupOld' }
+  { path: '/group/:id', component: Group, name: 'Group' }
 ];
 
 const router = createRouter({

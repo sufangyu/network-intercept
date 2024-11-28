@@ -21,7 +21,7 @@
       >
         <div class="text-[13px] w-[427px]">
           <p class="truncate">接口地址：{{ item.apiUrl }}</p>
-          <p class="flex justify-between text-gray-400 text-xs">
+          <p class="flex justify-between text-gray-400 text-xs dark:text-gray-500">
             <span>项目/分组：{{ item.projectName }}/{{ item.groupName }}</span>
             <span>接口名称：{{ item.apiName }}</span>
           </p>
@@ -115,7 +115,7 @@ const handleGotoPage = (item: SearchResult) => {
 .project-option {
   line-height: 1.5;
   border-bottom: 1px solid #f0f0f0;
-  @apply px-4 py-2 box-border h-auto;
+  @apply px-4 py-2 box-border h-auto dark:border-gray-700;
 
   p {
     padding: 3px 0;

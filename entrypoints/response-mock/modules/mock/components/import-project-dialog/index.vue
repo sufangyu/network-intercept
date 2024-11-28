@@ -27,8 +27,10 @@
                 {{ data.methodType }}
               </el-tag>
               <span class="mx-2">{{ data.apiName || data.name }}</span>
-              <span>{{ data.id }}</span>
-              <span class="text-gray-400" v-if="data.apiUrl">{{ data.apiUrl }}</span>
+              <!-- <span>{{ data.id }}</span> -->
+              <span class="text-gray-400 dark:text-gray-600" v-if="data.apiUrl">{{
+                data.apiUrl
+              }}</span>
             </template>
           </el-tree>
         </div>

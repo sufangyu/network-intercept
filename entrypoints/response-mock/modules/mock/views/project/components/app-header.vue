@@ -80,7 +80,7 @@
 <script lang="ts" setup>
 import { ElMessage } from "element-plus";
 import { MoreFilled, Upload, MagicStick, QuestionFilled } from "@element-plus/icons-vue";
-import IconMock from "~/assets/mock.svg";
+import IconMock from "~/assets/images/logo/mock.svg";
 import { PROJECT_APP_HEADER_OPERATE_ENUM } from "../../../types";
 import { useResponseMockImport, useResponseMockProject } from "../../../composables";
 import ImportProjectDialog from "../../../components/import-project-dialog/index.vue";
@@ -113,7 +113,8 @@ const handleExportConfig = () => {
 <style lang="scss" scoped>
 .app-header {
   @apply flex items-center justify-between p-[16px]
-    h-[64px] text-white bg-[#001529] text-sm;
+    h-[64px] text-white bg-[#001529] text-sm
+    dark:bg-[#010101];
 
   &__right {
     @apply flex items-center gap-4;

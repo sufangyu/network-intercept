@@ -3,6 +3,25 @@
     <div class="setting-header">
       <h1>网络拦截</h1>
       <p>可从下面相应入口去设置或开/关功能</p>
+
+      <div class="theme">
+        <el-dropdown placement="bottom">
+          <el-button plain :icon="currentTheme?.icon"></el-button>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item
+                v-for="item in ThemeList"
+                :key="item"
+                :icon="item.icon"
+                @click="setCurrentTheme(item.value)"
+                tabindex="0"
+              >
+                {{ item.label }}
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
+      </div>
     </div>
 
     <div class="setting-body">
@@ -50,15 +69,17 @@
 
 <script lang="ts" setup>
 import { Link } from "@element-plus/icons-vue";
-import { useResponseMockProject } from "../response-mock/modules/composables";
+import { useTheme } from "@/composables/use-theme";
+import { useResponseMockProject } from "../response-mock/modules/mock/composables";
 import { useHeaderIntercept } from "../header-intercept/modules/config/composables";
+
+const { ThemeList, currentTheme, setCurrentTheme } = useTheme();
 
 const {
   headerInterceptConfig,
   initHeaderInterceptConfig,
   toggleHeaderIntercept,
 } = useHeaderIntercept();
-
 const {
   responseProject,
   getProjectList,
@@ -72,11 +93,6 @@ const handleGotoPage = (pageName: "header-intercept" | "response-mock") => {
   windowHelper.open(pageUrl, pageName);
 };
 
-const setting = ref<{ headerEdit: boolean; mock: boolean }>({
-  headerEdit: true,
-  mock: true,
-});
-
 onMounted(async () => {
   initHeaderInterceptConfig();
 
@@ -86,11 +102,11 @@ onMounted(async () => {
 
 <style lang="postcss" scoped>
 .setting {
-  @apply bg-[#FAFAFA];
+  @apply bg-[#fafafa] dark:bg-[#2d2d2d];
 }
 
 .setting-header {
-  @apply bg-[#041527] text-white rounded-b-xl box-border;
+  @apply relative bg-[#041527] text-white rounded-b-xl box-border dark:bg-[#141414];
 
   h1 {
     @apply text-lg pt-6 pb-1.5 pl-4;
@@ -98,13 +114,17 @@ onMounted(async () => {
   p {
     @apply text-gray-400 pb-10 pl-4;
   }
+
+  .theme {
+    @apply absolute top-[26px] right-4;
+  }
 }
 
 .setting-body {
-  @apply px-4 pb-4 -mt-4;
+  @apply relative z-10 px-4 pb-4 -mt-4;
 
   .setting-item {
-    @apply bg-white p-4 flex items-center justify-between mb-3 rounded-xl;
+    @apply bg-white p-4 flex items-center justify-between mb-3 rounded-xl dark:bg-[#1D1E1F];
 
     &:last-child {
       @apply mb-0;

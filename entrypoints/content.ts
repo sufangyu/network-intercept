@@ -1,7 +1,6 @@
-// import { ResponseSetting, storageKeyForResponseSetting } from '@/modules/response-setting';
 import { version } from '../package.json';
-import { STORAGE_KEY_RESPONSE_MOCK } from './response-mock/modules/const';
-import { ResponseProject } from './response-mock/modules/types';
+import { STORAGE_KEY_RESPONSE_MOCK } from './response-mock/modules/mock/const';
+import { ResponseProject } from './response-mock/modules/mock/types';
 
 export default defineContentScript({
   matches: ['*://*/*'],

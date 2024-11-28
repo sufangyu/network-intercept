@@ -24,7 +24,7 @@ export function useResponseMock() {
     mockType: MOCK_TYPE_ENUM.常规,
     matchType: MATCH_TYPE_ENUM.包含,
     methodType: '',
-    responseState: 200,
+    responseState: '200',
     delayTime: DELAY_TIME_ENUM['500ms'],
     responseData: ''
   });

@@ -317,7 +317,7 @@ onMounted(async () => {
 <style lang="scss" scoped>
 .main-content {
   height: calc(100vh - 64px);
-  @apply bg-white p-4;
+  @apply bg-white p-4 dark:bg-[#141414];
 }
 
 ::v-deep(.el-tabs__item .is-icon-close) {

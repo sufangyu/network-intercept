@@ -92,7 +92,8 @@ const handleExportConfig = () => {
 <style lang="scss" scoped>
 .app-header {
   @apply flex items-center justify-between p-[16px]
-    h-[64px] text-white bg-[#001529] text-sm;
+    h-[64px] text-white bg-[#001529] text-sm
+    dark:bg-[#010101];
 
   &__right {
     @apply flex items-center gap-4;

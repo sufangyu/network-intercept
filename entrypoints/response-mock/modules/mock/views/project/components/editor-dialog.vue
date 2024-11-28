@@ -144,8 +144,7 @@ defineExpose({
 
 .codemirror-editor {
   border: 1px solid #d9d9d9;
-  border-radius: 6px;
-  outline: none;
+  @apply outline-0 rounded-md dark:border-[#4C4D4F];
 
   :deep(.cm-focused) {
     outline: none;
@@ -153,6 +152,14 @@ defineExpose({
 
   :deep(.cm-editor) {
     height: 250px;
+  }
+
+  :deep(.cm-gutters) {
+    @apply dark:bg-[#262727] dark:border-[#4C4D4F];
+  }
+
+  :deep(.cm-activeLineGutter) {
+    @apply dark:bg-[#225887] dark:text-white;
   }
 }
 </style>

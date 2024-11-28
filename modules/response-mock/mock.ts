@@ -3,8 +3,8 @@ import {
   type ResponseProject,
   type MockRuleItem,
   MATCH_TYPE_ENUM
-} from '@/entrypoints/response-mock/modules/types';
-import { MOCK_HEADER_KEY_MAP } from '@/entrypoints/response-mock/modules/const';
+} from '@/entrypoints/response-mock/modules/mock/types';
+import { MOCK_HEADER_KEY_MAP } from '@/entrypoints/response-mock/modules/mock/const';
 
 /**
  * 获取 Mock 响应数据
@@ -35,7 +35,7 @@ export const getMockRespponse = async (
         curResponseData = wrapResponseData(curResponseData, matchMockRule.responseDataBase);
       }
 
-      const status = matchMockRule.responseState || 200;
+      const status = matchMockRule.responseState || '200';
       const statusText = matchMockRule.responseStateText || 'OK';
       const headers = new Headers({
         'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ export const getMockRespponse = async (
       });
 
       mockResponse = new Response(curResponseData, {
-        status,
+        status: Number(status),
         statusText,
         headers
       });
