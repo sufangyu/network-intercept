@@ -20,17 +20,15 @@ const { createMockRule, editMockRule, getMockRule, getMockRuleWithApiAndMethod }
  * @param {ResponseGroupItem[]} projectData
  */
 export const handleImportByNewProject = async (
-  targetProject: { id: string; name: string },
-  projectData: ResponseGroupItem[]
+  targetProject: ResponseProjectItem,
+  groupList: ResponseGroupItem[]
 ) => {
   const projectItem: ResponseProjectItem = {
+    ...targetProject,
     id: '',
-    name: targetProject!.name,
-    responseDataBase: '',
-    collected: false,
-    status: STATUS_GLOBAL_ENUM.启用,
     groupList: []
   };
+
   // 1. 创建项目
   const newProject = await createProject(projectItem, true);
   if (!newProject) {
@@ -38,7 +36,7 @@ export const handleImportByNewProject = async (
   }
 
   // 2. 遍历创建分组 及 分组下的规则
-  projectData.forEach(async (groupItem) => {
+  groupList.forEach(async (groupItem) => {
     const newGroupItem = cloneDeep(groupItem);
     const newGroup = await createGroup(newGroupItem, newProject, true);
 

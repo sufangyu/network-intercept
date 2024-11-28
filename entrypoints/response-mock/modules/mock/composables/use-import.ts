@@ -8,6 +8,8 @@ export function useResponseMockImport() {
   /** 导入触发的`input`元素 */
   const fileInputRef = ref<HTMLInputElement | null>(null);
 
+  const fileInputListRef = ref<HTMLInputElement[]>([]);
+
   const importProjectDialogRef = ref<InstanceType<typeof ImportProjectDialog> | null>(null);
 
   /**
@@ -66,6 +68,7 @@ export function useResponseMockImport() {
 
   return {
     fileInputRef,
+    fileInputListRef,
     importProjectDialogRef,
     handleImportProjectConfig
   };

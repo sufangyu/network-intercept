@@ -42,7 +42,10 @@ import { responseProject } from "../../data";
 import { IMPORT_TYPE_ENUM, ResponseProjectItem } from "../../types";
 
 const emit = defineEmits<{
-  importType: [importType: IMPORT_TYPE_ENUM, targetProject: { id: string; name: string }];
+  confirmImport: [
+    importType: IMPORT_TYPE_ENUM,
+    targetProject: { id: string; name: string }
+  ];
 }>();
 
 const visible = ref(false);
@@ -94,7 +97,7 @@ const handleConfirm = () => {
     return;
   }
 
-  emit("importType", activeName.value, targetProject);
+  emit("confirmImport", activeName.value, targetProject);
   closeDialog();
 };
 

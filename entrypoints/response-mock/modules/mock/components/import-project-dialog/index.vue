@@ -13,7 +13,7 @@
         <div class="flex-1">
           <el-tree
             ref="treeRef"
-            :data="importProjectGroupList"
+            :data="curTargetProject?.groupList ?? []"
             default-expand-all
             show-checkbox
             node-key="id"
@@ -85,7 +85,10 @@
     </el-dialog>
 
     <!-- 选择导入的类型 -->
-    <SelectImportTypeDialog ref="selectImportTypeDialogRef" @importType="handleImport" />
+    <SelectImportTypeDialog
+      ref="selectImportTypeDialogRef"
+      @confirmImport="handleImport"
+    />
 
     <!-- 选择覆盖字段 -->
     <CoverFieldDialog
@@ -98,13 +101,14 @@
 <script lang="ts" setup>
 import { ElMessage, ElTree } from "element-plus";
 import { QuestionFilled, Setting } from "@element-plus/icons-vue";
+import { cloneDeep } from "lodash-es";
 import {
-  ConvertFileds,
+  type ConvertFileds,
+  type ResponseGroupItem,
+  type ResponseProjectItem,
   IMPORT_TYPE_ENUM,
   METHOD_TYPE_ENUM,
   SAME_RULE_HANDLE_ENUM,
-  type ResponseGroupItem,
-  type ResponseProjectItem,
 } from "../../types";
 import SelectImportTypeDialog from "./select-import-type-dialog.vue";
 import CoverFieldDialog from "./cover-field-dialog.vue";
@@ -141,16 +145,14 @@ const tagType = computed(() => {
 
 const treeRef = ref<InstanceType<typeof ElTree>>();
 const sameRuleHandle = ref(SAME_RULE_HANDLE_ENUM.保留两者);
-const importProjectGroupList = ref<ResponseGroupItem[]>([]);
 
 const curImportType = ref<IMPORT_TYPE_ENUM>(IMPORT_TYPE_ENUM.新建项目);
-const curTargetProject = ref<{ id: string; name: string } | null>(null);
+const curTargetProject = ref<ResponseProjectItem | null>(null);
 const coverFields = ref<ConvertFileds>({ group: [], rule: [] });
 const coverFieldsDialogVisible = ref(false);
 
 const handleClose = () => {
   sameRuleHandle.value = SAME_RULE_HANDLE_ENUM.保留两者;
-  importProjectGroupList.value = [];
 };
 
 const handleConfirm = async () => {
@@ -159,8 +161,8 @@ const handleConfirm = async () => {
   );
 
   // 最终选中要导入的数据
-  const filteredData = filterTreeData(
-    importProjectGroupList.value,
+  const groupList = filterTreeData(
+    curTargetProject.value?.groupList ?? [],
     checkedKeys,
     true
   ) as ResponseGroupItem[];
@@ -170,17 +172,17 @@ const handleConfirm = async () => {
   //   curImportType.value,
   //   curTargetProject.value,
   //   checkedKeys,
-  //   filteredData
+  //   groupList
   // );
 
   switch (curImportType.value) {
     case IMPORT_TYPE_ENUM.新建项目:
-      await handleImportByNewProject(curTargetProject.value!, filteredData);
+      await handleImportByNewProject(curTargetProject.value!, groupList);
       break;
     case IMPORT_TYPE_ENUM.已有项目:
       handleImportByExitProject(
-        curTargetProject.value! as ResponseProjectItem,
-        filteredData,
+        curTargetProject.value!,
+        groupList,
         sameRuleHandle.value,
         coverFields.value
       );
@@ -202,36 +204,39 @@ const handleImport = async (
 ) => {
   dialogVisible.value = true;
   curImportType.value = type;
-  curTargetProject.value = targetProject;
+
+  curTargetProject.value!.id = targetProject.id;
+  curTargetProject.value!.name = targetProject.name;
   await nextTick();
 
   // 获取所有节点的 ID 并选中所有节点
-  const allNodeKeys = getAllNodeKeys(importProjectGroupList.value);
+  const allNodeKeys = getAllNodeKeys(curTargetProject.value?.groupList ?? []);
   treeRef.value?.setCheckedKeys(allNodeKeys);
+};
+
+
+const closeDialog = () => {
+  dialogVisible.value = false;
 };
 
 /**
  * 打开弹窗
  * @param importProject 导入的项目
- * @param targetProject 目标项目（无: 可选择新建 or 导入指定项目）
+ * @param targetProject 目标项目（无: 可选择新建 or 导入已有项目）
  */
 const open = (
   importProject: ResponseProjectItem,
   targetProject?: ResponseProjectItem | null
 ) => {
   if (!targetProject) {
-    // 显示 新建或导入指定项目 弹窗
+    // 无导入目标项目时, 先显示 新建 或 选择已有项目 弹窗
     selectImportTypeDialogRef.value?.open();
   } else {
-    // 显示 选择导入数据 弹窗
+    // 有导入目标项目时, 显示 选择导入数据 弹窗
     handleImport(IMPORT_TYPE_ENUM.已有项目, targetProject);
   }
 
-  importProjectGroupList.value = importProject.groupList ?? [];
-};
-
-const closeDialog = () => {
-  dialogVisible.value = false;
+  curTargetProject.value = cloneDeep(importProject);
 };
 
 defineExpose({

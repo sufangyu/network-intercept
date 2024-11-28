@@ -3,6 +3,7 @@
 
   <el-scrollbar class="main-content">
     <!-- <p>{{ activeGroupId ?? "-" }}</p> -->
+    <!-- <p>{{ curProject?.groupList }}</p> -->
     <!-- <p>{{ curGroup }}</p> -->
 
     <el-tabs
@@ -318,11 +319,5 @@ onMounted(async () => {
 .main-content {
   height: calc(100vh - 64px);
   @apply bg-white p-4 dark:bg-[#141414];
-}
-
-::v-deep(.el-tabs__item .is-icon-close) {
-  visibility: visible !important;
-  opacity: 1 !important;
-  width: 14px !important;
 }
 </style>

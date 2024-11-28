@@ -182,7 +182,9 @@
         />
         <p class="text-gray-400" v-if="form.matchType === MATCH_TYPE_ENUM.网址前缀">
           网址前缀不包含协议部分; 示例:
-          <span class="text-orange-500 font-bold">www.example.com,test.example.com</span>
+          <span class="text-orange-500 font-bold"> www.example.com </span>
+          或
+          <span class="text-orange-500 font-bold"> test.example.com </span>
         </p>
 
         <p class="text-gray-400" v-if="form.matchType === MATCH_TYPE_ENUM.域名">

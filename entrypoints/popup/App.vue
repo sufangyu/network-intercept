@@ -2,7 +2,7 @@
   <div class="setting">
     <div class="setting-header">
       <h1>网络拦截</h1>
-      <p>可从下面相应入口去设置或开/关功能</p>
+      <p>可从下面相应入口去设置规则, 开启/关闭功能</p>
 
       <div class="theme">
         <el-dropdown placement="bottom">
@@ -14,7 +14,6 @@
                 :key="item"
                 :icon="item.icon"
                 @click="setCurrentTheme(item.value)"
-                tabindex="0"
               >
                 {{ item.label }}
               </el-dropdown-item>

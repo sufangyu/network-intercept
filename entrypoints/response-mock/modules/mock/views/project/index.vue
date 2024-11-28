@@ -5,7 +5,7 @@
     <section class="grid grid-cols-4 gap-4 p-4" v-if="projectList.length > 0">
       <div
         class="project-item"
-        v-for="projectItem in projectList"
+        v-for="(projectItem, idx) in projectList"
         @click="$router.push({ name: 'Group', params: { id: projectItem.id } })"
       >
         <div class="flex justify-between items-center mb-5">
@@ -58,13 +58,17 @@
                   >
                     删除项目
                   </el-dropdown-item>
-                  <el-dropdown-item :icon="Upload" divided>
+                  <el-dropdown-item
+                    :icon="Upload"
+                    divided
+                    @click="() => fileInputListRef?.[idx]?.click()"
+                  >
                     <input
                       type="file"
-                      ref="fileInputRef"
+                      ref="fileInputListRef"
                       class="hidden"
                       accept=".json"
-                      @change="handleImportProjectConfig"
+                      @change="(ev) => handleImportProjectConfig(ev, projectItem)"
                     />
                     导入数据
                   </el-dropdown-item>
@@ -99,6 +103,9 @@
 
   <!-- 项目添加、编辑 -->
   <EditorDialog ref="editorDialogRef" />
+
+  <!-- 导入项目 -->
+  <ImportProjectDialog ref="importProjectDialogRef" />
 </template>
 
 <script lang="ts" setup>
@@ -118,6 +125,7 @@ import { STATUS_GLOBAL_ENUM } from "@/types";
 import { responseProject } from "../../data/index";
 import { PROJECT_APP_HEADER_OPERATE_ENUM, ResponseProjectItem } from "../../types";
 import { useResponseMockImport, useResponseMockProject } from "../../composables";
+import ImportProjectDialog from "../../components/import-project-dialog/index.vue";
 import AppHeader from "./components/app-header.vue";
 import EditorDialog from "./components/editor-dialog.vue";
 
@@ -127,7 +135,11 @@ const {
   toggleProjectStatus,
   toggleProjectCollected,
 } = useResponseMockProject();
-const { handleImportProjectConfig } = useResponseMockImport();
+const {
+  fileInputListRef,
+  importProjectDialogRef,
+  handleImportProjectConfig,
+} = useResponseMockImport();
 
 /** 全部项目 */
 const projectList = computed(() => responseProject.value.list ?? []);

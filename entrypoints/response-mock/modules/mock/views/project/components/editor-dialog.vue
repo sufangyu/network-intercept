@@ -111,6 +111,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
     return;
   }
   await formEl.validate();
+  form.value.id = "";
 
   // 格式化 JSON 数据缩紧2个空格
   form.value.responseDataBase = formatObjectTabIndent(form.value.responseDataBase);
