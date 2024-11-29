@@ -28,9 +28,9 @@
               </el-tag>
               <span class="mx-2">{{ data.apiName || data.name }}</span>
               <!-- <span>{{ data.id }}</span> -->
-              <span class="text-gray-400 dark:text-gray-600" v-if="data.apiUrl">{{
-                data.apiUrl
-              }}</span>
+              <span class="text-gray-400 dark:text-gray-600" v-if="data.apiUrl">
+                {{ data.apiUrl }}
+              </span>
             </template>
           </el-tree>
         </div>
@@ -228,6 +228,8 @@ const open = (
   importProject: ResponseProjectItem,
   targetProject?: ResponseProjectItem | null
 ) => {
+  curTargetProject.value = cloneDeep(importProject);
+
   if (!targetProject) {
     // 无导入目标项目时, 先显示 新建 或 选择已有项目 弹窗
     selectImportTypeDialogRef.value?.open();
@@ -235,8 +237,6 @@ const open = (
     // 有导入目标项目时, 显示 选择导入数据 弹窗
     handleImport(IMPORT_TYPE_ENUM.已有项目, targetProject);
   }
-
-  curTargetProject.value = cloneDeep(importProject);
 };
 
 defineExpose({

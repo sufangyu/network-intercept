@@ -1,4 +1,4 @@
-import { STATUS_GLOBAL_ENUM } from '@/types';
+import { cloneDeep } from 'lodash-es';
 import { useResponseMockGroup, useResponseMock, useResponseMockProject } from '../../composables';
 import {
   ConvertFileds,
@@ -7,12 +7,10 @@ import {
   ResponseProjectItem,
   SAME_RULE_HANDLE_ENUM
 } from '../../types';
-import { cloneDeep } from 'lodash-es';
 
 const { createProject } = useResponseMockProject();
 const { createGroup, editGroup, getProjectGroup, getProjectGroupByName } = useResponseMockGroup();
-const { createMockRule, editMockRule, getMockRule, getMockRuleWithApiAndMethod } =
-  useResponseMock();
+const { createMockRule, editMockRule, getMockRuleWithApiAndMethod } = useResponseMock();
 
 /**
  * 新建项目方式导入
@@ -152,7 +150,7 @@ const sameRuleHandleFunc: Record<
       const newRuleItem = cloneDeep(ruleItem);
       const existRule = getMockRuleWithApiAndMethod(newRuleItem, existGroup);
       if (existRule) {
-        return;
+        continue;
       }
 
       createMockRule(newRuleItem, existGroup, targetProject, true);
