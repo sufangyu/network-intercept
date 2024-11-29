@@ -111,7 +111,6 @@ const submitForm = async (formEl: FormInstance | undefined) => {
     return;
   }
   await formEl.validate();
-  form.value.id = "";
 
   // 格式化 JSON 数据缩紧2个空格
   form.value.responseDataBase = formatObjectTabIndent(form.value.responseDataBase);
@@ -124,9 +123,11 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   dialogVisible.value = false;
 };
 
-const open = (item?: ResponseProjectItem) => {
+const open = async (item?: ResponseProjectItem) => {
   dialogVisible.value = true;
+  await nextTick();
   formRef.value?.resetFields();
+  form.value.id = "";
 
   if (item) {
     form.value = { ...item };
