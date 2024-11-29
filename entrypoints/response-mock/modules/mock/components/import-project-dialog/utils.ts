@@ -65,7 +65,7 @@ const convertByKeys = async (
   // 已存在分组时, 编辑分组(保留原名称、说明等); 否则新建分组
   if (existGroup) {
     groupKeys.forEach((k) => {
-      existGroup?.[k] && ((newGroupItem as any)[k] = (existGroup as any)[k]);
+      existGroup?.[k] && ((existGroup as any)[k] = (newGroupItem as any)[k]);
     });
     existGroup = await editGroup(newGroupItem, targetProject, true);
   } else {
@@ -79,7 +79,7 @@ const convertByKeys = async (
 
     if (existRule) {
       ruleKeys.forEach((k) => {
-        newRuleItem?.[k] && ((newRuleItem as any)[k] = (existRule as any)[k]);
+        newRuleItem?.[k] && ((existRule as any)[k] = (newRuleItem as any)[k]);
       });
       editMockRule(newRuleItem, existGroup!, targetProject, true);
     } else {
