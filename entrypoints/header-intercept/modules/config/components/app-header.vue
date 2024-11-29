@@ -30,8 +30,8 @@
 
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item disabled :divided="false">
-              <el-icon><QuestionFilled /></el-icon>帮助中心
+            <el-dropdown-item @click="handleGotoHelp()" :divided="false">
+              <el-icon><QuestionFilled /></el-icon>使用文档
             </el-dropdown-item>
           </el-dropdown-menu>
         </template>
@@ -54,6 +54,11 @@ const { headerInterceptConfig, toggleHeaderIntercept } = useHeaderIntercept();
 
 const handleOperate = (type: HEADER_INTERCEPT_APP_HEADER_OPERATE_ENUM) => {
   emit("operate", type);
+};
+
+const handleGotoHelp = () => {
+  const url = "https://github.com/sufangyu/network-intercept/blob/main/.guide/headers.md";
+  window.open(url);
 };
 </script>
 

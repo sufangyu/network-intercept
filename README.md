@@ -1,16 +1,34 @@
-# WXT + Vue 3
+# Network Intercept
 
-This template should help get you started developing with Vue 3 in WXT.
+网络拦截工具, 用于调试、mock 接口响应数据。功能模块有以下几个:
 
-## TODO
+- 拦截网络请求, 设置请求头
+- 拦截 Fetch、XMLHttpRequest 发起的请求, Mock 响应数据
 
-- [-] 响应头信息打印、toast 信息框提示
-- [-] mock 响应增加 headers 配置（组件）
-- [-] 分组重置（全删除）
-- [-] 支持项目级别（项目 > 分组 > 接口）
-  - [-] 添加、删除、修改、停用/启用
-  - [ ] 导出分组
-  - [ ] 导入项目
-    - 新建、已有项目（匹配相同： 覆盖已有、智能合并、不导入、保留两者）
-    - 支持选择导入的分组、具体接口
-- [ ] 导入增加版本
+## 设置请求头
+
+通过设置请求头, 实现阻止请求、重定向请求、新增或修改请求头、新增或修改响应头, 下图为主要功能截图。 具体用法请看[使用文档](.guide/headers.md)。
+
+**1. 分组列表**
+
+<img src=".screenshot/headers/list.png" style="max-width: 1000px;">
+
+**2. 添加、编辑请求头规则**
+
+<img src=".screenshot/headers/edit.png" style="max-width: 1000px;">
+
+## Mock 响应数据
+
+通过设置响应的 Mock 规则, 拦截 Fetch、XMLHttpRequest 发起的请求直接返回自定义数据, 下图为主要功能截图。 具体用法请看[使用文档](.guide/mock.md)。
+
+**1. 项目列表**
+
+<img src=".screenshot/mock/project.png" style="max-width: 1000px;">
+
+**2. 分组、规则列表**
+
+<img src=".screenshot/mock/group.png" style="max-width: 1000px;">
+
+**3. 添加、编辑规则**
+
+<img src=".screenshot/mock/rule.png" style="max-width: 1000px;">

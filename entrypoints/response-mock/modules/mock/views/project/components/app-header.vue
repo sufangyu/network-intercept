@@ -64,8 +64,8 @@
                 </span>
               </el-tooltip>
             </el-dropdown-item>
-            <el-dropdown-item disabled :icon="QuestionFilled" divided>
-              帮助中心
+            <el-dropdown-item :icon="QuestionFilled" divided @click="handleGotoHelp">
+              使用文档
             </el-dropdown-item>
           </el-dropdown-menu>
         </template>
@@ -99,6 +99,11 @@ const {
 
 const handleOperate = (type: PROJECT_APP_HEADER_OPERATE_ENUM) => {
   emit("operate", type);
+};
+
+const handleGotoHelp = () => {
+  const url = "https://github.com/sufangyu/network-intercept/blob/main/.guide/mock.md";
+  window.open(url);
 };
 
 // 导出配置 -------------------------------------------------------------------
