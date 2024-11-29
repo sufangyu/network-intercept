@@ -292,11 +292,10 @@ const open = async (type: ActionType, item?: MockRuleItem) => {
 
   await nextTick();
   formRef.value?.resetFields();
+  form.value.id = '';
 
   if (item) {
     const formData = cloneDeep(item);
-
-
 
     if (type === "clone") {
       formData.id = "";
