@@ -18,7 +18,7 @@
         prop="requestHeaders"
         :rules="[{ validator: validateHeadersConfig, trigger: 'blur' }]"
       >
-        <HeadersConfig v-model="form.requestHeaders" />
+        <HeadersConfig v-model="form.requestHeaders!" />
       </el-form-item>
     </el-form>
 
@@ -34,8 +34,11 @@
 <script lang="ts" setup>
 import { FormInstance } from "element-plus";
 import HeadersConfig from "@/components/headers-config.vue";
-import { useResponseMockGroup } from "../../../composables";
-import type { ResponseGroupItem, ResponseProjectItem } from "../../../types";
+import { useResponseMockGroup } from "@/modules/response-mock/composables";
+import type {
+  ResponseGroupItem,
+  ResponseProjectItem,
+} from "@/modules/response-mock/types";
 
 const props = withDefaults(defineProps<{ project?: ResponseProjectItem | null }>(), {
   project: null,

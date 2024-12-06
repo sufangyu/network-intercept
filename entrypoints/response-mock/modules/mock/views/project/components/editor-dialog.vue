@@ -80,8 +80,8 @@ import { FormInstance } from "element-plus";
 import { QuestionFilled } from "@element-plus/icons-vue";
 import CodeMirror from "vue-codemirror6";
 import { json, jsonParseLinter } from "@codemirror/lang-json";
-import { ResponseProjectItem } from "../../../types";
-import { useResponseMockProject } from "../../../composables/use-project";
+import { ResponseProjectItem } from "@/modules/response-mock/types";
+import { useResponseMockProject } from "@/modules/response-mock/composables";
 
 const { projectForm: form, createProject, editProject } = useResponseMockProject();
 

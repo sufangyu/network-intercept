@@ -189,7 +189,7 @@ import {
   useResponseMockGroup,
   useResponseMock,
   useResponseMockProject,
-} from "../../composables";
+} from "@/modules/response-mock/composables";
 import {
   GROUP_APP_HEADER_OPERATE_ENUM,
   DELAY_TIME_ENUM,
@@ -198,7 +198,7 @@ import {
   MOCK_TYPE_ENUM,
   ResponseGroupItem,
   MockRuleItem,
-} from "../../types";
+} from "@/modules/response-mock/types";
 import AppHeader from "./components/app-header.vue";
 import EditorDialog from "./components/editor-dialog.vue";
 import MockEditorDrawer from "./components/mock-editor-drawer.vue";

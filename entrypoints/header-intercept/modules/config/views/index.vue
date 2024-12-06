@@ -194,13 +194,13 @@ import {
   HeaderRuleItem,
   REQUEST_METHOD_ENUM,
   RULE_TYPE_ENUM,
-} from "../types";
+} from "@/modules/header-intercept/types";
 import {
   useHeaderInterceptGroup,
   useHeaderIntercept,
   useHeaderInterceptRule,
   useHeaderInterceptImport,
-} from "../composables";
+} from "@/modules/header-intercept/composables";
 
 const { initHeaderInterceptConfig, headerInterceptConfig } = useHeaderIntercept();
 const { activeGroupId, deleteGroup } = useHeaderInterceptGroup();

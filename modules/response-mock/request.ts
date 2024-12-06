@@ -3,8 +3,8 @@ import { XMLHttpRequestInterceptor } from '@mswjs/interceptors/XMLHttpRequest';
 import { FetchInterceptor } from '@mswjs/interceptors/fetch';
 import { getMockRespponse } from './mock';
 import { renderToast } from './toast';
-import { ResponseProject } from '@/entrypoints/response-mock/modules/mock/types';
-import { MOCK_HEADER_KEY_MAP } from '@/entrypoints/response-mock/modules/mock/const';
+import { ResponseProject } from './types';
+import { MOCK_HEADER_KEY_MAP } from './const';
 
 /**
  * 拦截请求

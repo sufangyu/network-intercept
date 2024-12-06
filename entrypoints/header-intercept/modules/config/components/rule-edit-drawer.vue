@@ -115,7 +115,7 @@
           ]"
         >
           <HeadersConfig
-            v-model="form.headersConfig"
+            v-model="form.headersConfig!"
             :disabled="actionType === 'detail'"
           />
         </el-form-item>
@@ -207,8 +207,8 @@ import {
   REQUEST_METHOD_ENUM,
   RULE_TYPE_ENUM,
   type HeaderRuleItem,
-} from "../types";
-import { useHeaderInterceptGroup, useHeaderInterceptRule } from "../composables";
+} from "@/modules/header-intercept/types";
+import { useHeaderInterceptGroup, useHeaderInterceptRule } from "@/modules/header-intercept/composables";
 
 type ActionType = "create" | "edit" | "clone" | "detail";
 

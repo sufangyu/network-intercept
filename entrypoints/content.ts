@@ -1,7 +1,7 @@
 import { AutoGotoUrl } from '@/modules/auto-goto-url/types';
 import { version } from '../package.json';
-import { STORAGE_KEY_RESPONSE_MOCK } from './response-mock/modules/mock/const';
-import { ResponseProject } from './response-mock/modules/mock/types';
+import { STORAGE_KEY_RESPONSE_MOCK } from '@/modules/response-mock/const';
+import { ResponseProject } from '@/modules/response-mock/types';
 import { STORAGE_KEY_AUTO_GOTO_URL } from '@/modules/auto-goto-url/const';
 
 export default defineContentScript({

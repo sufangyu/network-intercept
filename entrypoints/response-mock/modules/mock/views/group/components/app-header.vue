@@ -40,7 +40,7 @@
               导入数据
             </el-dropdown-item>
 
-            <el-dropdown-item :icon="Upload" @click="handleExportConfig">
+            <el-dropdown-item divided :icon="Upload" @click="handleExportConfig">
               导出数据
             </el-dropdown-item>
           </el-dropdown-menu>
@@ -58,8 +58,14 @@ import { useRouter } from "vue-router";
 import { ElMessage } from "element-plus";
 import { MoreFilled, Download, Upload } from "@element-plus/icons-vue";
 import { STATUS_GLOBAL_ENUM } from "@/types";
-import { GROUP_APP_HEADER_OPERATE_ENUM, ResponseProjectItem } from "../../../types";
-import { useResponseMockProject, useResponseMockImport } from "../../../composables";
+import {
+  GROUP_APP_HEADER_OPERATE_ENUM,
+  ResponseProjectItem,
+} from "@/modules/response-mock/types";
+import {
+  useResponseMockProject,
+  useResponseMockImport,
+} from "@/modules/response-mock/composables";
 import ImportProjectDialog from "../../../components/import-project-dialog/index.vue";
 
 const props = withDefaults(defineProps<{ project?: ResponseProjectItem | null }>(), {

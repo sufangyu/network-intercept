@@ -28,9 +28,12 @@
 
 <script lang="ts" setup>
 import { FormInstance } from "element-plus";
-import { HeaderRuleItem } from "../types";
-import { headerInterceptConfig } from "../data";
-import { useHeaderInterceptGroup, useHeaderInterceptRule } from "../composables";
+import { HeaderRuleItem } from "@/modules/header-intercept/types";
+import { headerInterceptConfig } from "@/modules/header-intercept/data";
+import {
+  useHeaderInterceptGroup,
+  useHeaderInterceptRule,
+} from "@/modules/header-intercept/composables";
 
 const { activeGroupId } = useHeaderInterceptGroup();
 const { moveRule } = useHeaderInterceptRule();

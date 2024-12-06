@@ -34,7 +34,7 @@
 <script lang="ts" setup>
 import { useRouter } from "vue-router";
 import { throttle } from "lodash-es";
-import { responseProject } from "../../data";
+import { responseProject } from "@/modules/response-mock/data";
 
 const props = withDefaults(
   defineProps<{

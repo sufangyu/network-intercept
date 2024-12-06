@@ -27,8 +27,8 @@
 
 <script lang="ts" setup>
 import { FormInstance } from "element-plus";
-import { HeaderInterceptGroupItem } from "../types";
-import { useHeaderInterceptGroup } from "../composables";
+import { HeaderInterceptGroupItem } from "@/modules/header-intercept/types";
+import { useHeaderInterceptGroup } from "@/modules/header-intercept/composables";
 
 const { createGroup, editGroup } = useHeaderInterceptGroup();
 

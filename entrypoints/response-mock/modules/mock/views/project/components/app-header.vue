@@ -81,8 +81,11 @@
 import { ElMessage } from "element-plus";
 import { MoreFilled, Upload, MagicStick, QuestionFilled } from "@element-plus/icons-vue";
 import IconMock from "~/assets/images/logo/mock.svg";
-import { PROJECT_APP_HEADER_OPERATE_ENUM } from "../../../types";
-import { useResponseMockImport, useResponseMockProject } from "../../../composables";
+import { PROJECT_APP_HEADER_OPERATE_ENUM } from "@/modules/response-mock/types";
+import {
+  useResponseMockImport,
+  useResponseMockProject,
+} from "@/modules/response-mock/composables";
 import ImportProjectDialog from "../../../components/import-project-dialog/index.vue";
 import GlobalSearch from "../../../components/global-search/index.vue";
 

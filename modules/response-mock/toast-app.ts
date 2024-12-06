@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import 'reflect-metadata';
-import { MOCK_HEADER_KEY_MAP } from '@/entrypoints/response-mock/modules/mock/const';
+import { MOCK_HEADER_KEY_MAP } from './const';
 
 @customElement('mock-toast-item')
 class TaostApp extends LitElement {

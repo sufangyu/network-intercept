@@ -122,9 +122,15 @@ import {
   Upload,
 } from "@element-plus/icons-vue";
 import { STATUS_GLOBAL_ENUM } from "@/types";
-import { responseProject } from "../../data/index";
-import { PROJECT_APP_HEADER_OPERATE_ENUM, ResponseProjectItem } from "../../types";
-import { useResponseMockImport, useResponseMockProject } from "../../composables";
+import { responseProject } from "@/modules/response-mock/data/index";
+import {
+  PROJECT_APP_HEADER_OPERATE_ENUM,
+  ResponseProjectItem,
+} from "@/modules/response-mock/types";
+import {
+  useResponseMockImport,
+  useResponseMockProject,
+} from "@/modules/response-mock/composables";
 import ImportProjectDialog from "../../components/import-project-dialog/index.vue";
 import AppHeader from "./components/app-header.vue";
 import EditorDialog from "./components/editor-dialog.vue";

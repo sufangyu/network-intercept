@@ -78,8 +78,8 @@
 <script lang="ts" setup>
 import { Link } from "@element-plus/icons-vue";
 import { useTheme } from "@/composables/use-theme";
-import { useResponseMockProject } from "../response-mock/modules/mock/composables";
-import { useHeaderIntercept } from "../header-intercept/modules/config/composables";
+import { useResponseMockProject } from "@/modules/response-mock/composables";
+import { useHeaderIntercept } from "@/modules/header-intercept/composables";
 
 const { ThemeList, currentTheme, setCurrentTheme } = useTheme();
 

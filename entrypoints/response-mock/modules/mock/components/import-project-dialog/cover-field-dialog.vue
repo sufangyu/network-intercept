@@ -50,7 +50,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ConvertFileds, MockRuleItem, ResponseGroupItem } from "../../types";
+import { ConvertFileds } from "@/modules/response-mock/types";
 import CheckOptions from "./check-options.vue";
 
 const props = withDefaults(

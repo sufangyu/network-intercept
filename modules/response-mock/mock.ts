@@ -1,10 +1,6 @@
 import { cloneDeep } from 'lodash-es';
-import {
-  type ResponseProject,
-  type MockRuleItem,
-  MATCH_TYPE_ENUM
-} from '@/entrypoints/response-mock/modules/mock/types';
-import { MOCK_HEADER_KEY_MAP } from '@/entrypoints/response-mock/modules/mock/const';
+import { type ResponseProject, type MockRuleItem, MATCH_TYPE_ENUM } from './types';
+import { MOCK_HEADER_KEY_MAP } from './const';
 
 /**
  * 获取 Mock 响应数据

@@ -1,7 +1,7 @@
 import { ImportFileWithVersion } from '@/types';
 import { ElMessage } from 'element-plus';
 import { ResponseProjectItem } from '../types';
-import ImportProjectDialog from '../components/import-project-dialog/index.vue';
+import ImportProjectDialog from '@/entrypoints/response-mock/modules/mock/components/import-project-dialog/index.vue';
 import { responseProjectItemSchema } from '../scheme/project';
 
 export function useResponseMockImport() {

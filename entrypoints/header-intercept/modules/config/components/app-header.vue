@@ -43,8 +43,8 @@
 <script lang="ts" setup>
 import { MoreFilled, QuestionFilled } from "@element-plus/icons-vue";
 import IconHeader from "~/assets/images/logo/header.svg";
-import { HEADER_INTERCEPT_APP_HEADER_OPERATE_ENUM } from "../types";
-import { useHeaderIntercept } from "../composables";
+import { HEADER_INTERCEPT_APP_HEADER_OPERATE_ENUM } from "@/modules/header-intercept/types";
+import { useHeaderIntercept } from "@/modules/header-intercept/composables";
 
 const emit = defineEmits<{
   operate: [type: HEADER_INTERCEPT_APP_HEADER_OPERATE_ENUM];

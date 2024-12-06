@@ -1,13 +1,8 @@
 import { DeclarativeNetRequest } from 'wxt/browser';
 import { STATUS_GLOBAL_ENUM } from '@/types';
-import {
-  HeaderInterceptConfig,
-  HeaderRuleItem,
-  MATCH_TYPE_ENUM,
-  RULE_TYPE_ENUM
-} from '@/entrypoints/header-intercept/modules/config/types';
-import { STORAGE_KEY_HEADER_INTERCEPT } from '@/entrypoints/header-intercept/modules/config/const';
-import { headerInterceptConfig } from '@/entrypoints/header-intercept/modules/config/data';
+import { HeaderInterceptConfig, HeaderRuleItem, MATCH_TYPE_ENUM, RULE_TYPE_ENUM } from './types';
+import { STORAGE_KEY_HEADER_INTERCEPT } from './const';
+import { headerInterceptConfig } from './data';
 
 // 用于跟踪下一个可用的唯一 ID
 let nextRuleId = 1;

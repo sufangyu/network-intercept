@@ -135,7 +135,7 @@
             </el-tooltip>
           </span>
         </template>
-        <HeadersConfig v-model="form.responseHeaders" />
+        <HeadersConfig v-model="form.responseHeaders!" />
       </el-form-item>
 
       <el-form-item
@@ -185,7 +185,7 @@ import CodeMirror from "vue-codemirror6";
 import { json, jsonParseLinter } from "@codemirror/lang-json";
 import { QuestionFilled } from "@element-plus/icons-vue";
 import HeadersConfig from "@/components/headers-config.vue";
-import { useResponseMock } from "../../../composables";
+import { useResponseMock } from "@/modules/response-mock/composables";
 import {
   DELAY_TIME_ENUM, MATCH_TYPE_ENUM,
   METHOD_TYPE_ENUM,
@@ -193,7 +193,7 @@ import {
   type MockRuleItem,
   type ResponseGroupItem,
   type ResponseProjectItem
-} from "../../../types";
+} from "@/modules/response-mock/types";
 
 type ActionType = "create" | "edit" | "clone" | "detail";
 

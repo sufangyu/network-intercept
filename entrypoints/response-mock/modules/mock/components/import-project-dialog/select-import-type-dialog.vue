@@ -38,8 +38,8 @@
 
 <script lang="ts" setup>
 import { ElMessage } from "element-plus";
-import { responseProject } from "../../data";
-import { IMPORT_TYPE_ENUM, ResponseProjectItem } from "../../types";
+import { responseProject } from "@/modules/response-mock/data";
+import { IMPORT_TYPE_ENUM, ResponseProjectItem } from "@/modules/response-mock/types";
 
 const emit = defineEmits<{
   confirmImport: [

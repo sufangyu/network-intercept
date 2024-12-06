@@ -2,7 +2,7 @@
   "name": "network-intercept",
   "description": "网络拦截插件，处理请求拦截、响应拦截等",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "scripts": {
     "dev": "wxt",

@@ -1,12 +1,16 @@
 import { cloneDeep } from 'lodash-es';
-import { useResponseMockGroup, useResponseMock, useResponseMockProject } from '../../composables';
+import {
+  useResponseMockGroup,
+  useResponseMock,
+  useResponseMockProject
+} from '@/modules/response-mock/composables';
 import {
   ConvertFileds,
   MockRuleItem,
   ResponseGroupItem,
   ResponseProjectItem,
   SAME_RULE_HANDLE_ENUM
-} from '../../types';
+} from '@/modules/response-mock/types';
 
 const { createProject } = useResponseMockProject();
 const { createGroup, editGroup, getProjectGroup, getProjectGroupByName } = useResponseMockGroup();

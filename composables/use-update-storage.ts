@@ -1,6 +1,8 @@
 import { cloneDeep } from 'lodash-es';
 import { ElMessage } from 'element-plus';
 import { STORAGE_KEY_AUTO_GOTO_URL } from '@/modules/auto-goto-url/const/storage';
+import { STORAGE_KEY_HEADER_INTERCEPT } from '@/modules/header-intercept/const';
+import { STORAGE_KEY_RESPONSE_MOCK } from '@/modules/response-mock/const';
 
 /**
  * 更新本地存储数据
@@ -11,7 +13,10 @@ import { STORAGE_KEY_AUTO_GOTO_URL } from '@/modules/auto-goto-url/const/storage
  * @return {*}
  */
 export function useUpdateStorage<T = Record<string, any>>(
-  storageKey: typeof STORAGE_KEY_AUTO_GOTO_URL
+  storageKey:
+    | typeof STORAGE_KEY_AUTO_GOTO_URL
+    | typeof STORAGE_KEY_HEADER_INTERCEPT
+    | typeof STORAGE_KEY_RESPONSE_MOCK
 ) {
   /**
    * 更新本地存储数据

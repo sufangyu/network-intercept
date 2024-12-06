@@ -109,7 +109,7 @@ import {
   IMPORT_TYPE_ENUM,
   METHOD_TYPE_ENUM,
   SAME_RULE_HANDLE_ENUM,
-} from "../../types";
+} from "@/modules/response-mock/types";
 import SelectImportTypeDialog from "./select-import-type-dialog.vue";
 import CoverFieldDialog from "./cover-field-dialog.vue";
 import {

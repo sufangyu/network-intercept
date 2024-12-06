@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useResponseMockProject } from "./modules/mock/composables/index";
+import { useResponseMockProject } from "@/modules/response-mock/composables/index";
 
 const { getProjectList } = useResponseMockProject();
 
