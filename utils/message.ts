@@ -37,7 +37,8 @@ export interface MessageEventData<T = Record<string, any> | string | number | bo
  * @enum {number}
  */
 export enum MESSAGE_EVENT_DATA_ACTION_TYPE {
-  获取响应模拟数据设置 = 'getResponseMockConfig'
+  获取响应模拟数据设置 = 'getResponseMockConfig',
+  获取自动跳转配置 = 'getAutoGotoUrlConfig'
 }
 
 export const postMessageWithPromise = <T = any>(
@@ -45,7 +46,7 @@ export const postMessageWithPromise = <T = any>(
   targetOrigin = '*'
 ): Promise<T> => {
   return new Promise((resolve, reject) => {
-    const messageId = message.id || Date.now().toString();
+    const messageId = message.id || `${message.actionType}-${Date.now()}`;
     if (!message.id) {
       message.id = messageId;
     }

@@ -1,9 +1,9 @@
 import { STORAGE_KEY_HEADER_INTERCEPT } from '../const';
 import { headerInterceptConfig } from '../data';
+import { HeaderInterceptConfig } from '../types';
 import { useHeaderInterceptGroup } from './use-group';
-import { useUpdateStorage } from './use-update-storage';
 
-const { updateStorage } = useUpdateStorage();
+const { updateStorage } = useUpdateStorage<HeaderInterceptConfig>(STORAGE_KEY_HEADER_INTERCEPT);
 const { setActiveGroupId } = useHeaderInterceptGroup();
 
 export function useHeaderIntercept() {

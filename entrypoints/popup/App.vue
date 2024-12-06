@@ -62,6 +62,15 @@
           />
         </div>
       </div>
+
+      <div class="setting-item">
+        <p class="label" @click="handleGotoPage('tools', 'auto-goto-url')">
+          自动跳转
+          <el-icon>
+            <Link />
+          </el-icon>
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -85,10 +94,18 @@ const {
   toggleProjectMockOrToast,
 } = useResponseMockProject();
 
-const handleGotoPage = (pageName: "header-intercept" | "response-mock") => {
+const handleGotoPage = (
+  pageName: "header-intercept" | "response-mock" | "tools",
+  moduleName?: string
+) => {
   const curWindow = browser.extension.getViews({ type: "popup" })[0];
   const curOrigin = curWindow.location.origin;
-  const pageUrl = `${curOrigin}/${pageName}.html`;
+  let pageUrl = `${curOrigin}/${pageName}.html`;
+
+  if (moduleName) {
+    pageUrl = `${pageUrl}#/${moduleName}`;
+  }
+
   windowHelper.open(pageUrl, pageName);
 };
 

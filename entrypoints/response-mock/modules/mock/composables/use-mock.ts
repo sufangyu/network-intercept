@@ -7,12 +7,13 @@ import {
   MOCK_TYPE_ENUM,
   MockRuleItem,
   ResponseGroupItem,
+  ResponseProject,
   ResponseProjectItem
 } from '../types';
 import { responseProject } from '../data';
-import { useUpdateStorage } from './use-update-storage';
+import { STORAGE_KEY_RESPONSE_MOCK } from '../const';
 
-const { updateStorage } = useUpdateStorage();
+const { updateStorage } = useUpdateStorage<ResponseProject>(STORAGE_KEY_RESPONSE_MOCK);
 
 export function useResponseMock() {
   const formRef = ref<FormInstance>();

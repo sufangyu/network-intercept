@@ -1,9 +1,9 @@
 import { nanoid } from 'nanoid';
 import { headerInterceptConfig } from '../data';
-import { HeaderInterceptGroupItem } from '../types';
-import { useUpdateStorage } from './use-update-storage';
+import { HeaderInterceptConfig, HeaderInterceptGroupItem } from '../types';
+import { STORAGE_KEY_HEADER_INTERCEPT } from '../const';
 
-const { updateStorage } = useUpdateStorage();
+const { updateStorage } = useUpdateStorage<HeaderInterceptConfig>(STORAGE_KEY_HEADER_INTERCEPT);
 
 /** 当前激活的分组ID */
 const activeGroupId = ref('');

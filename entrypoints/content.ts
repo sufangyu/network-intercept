@@ -1,6 +1,8 @@
+import { AutoGotoUrl } from '@/modules/auto-goto-url/types';
 import { version } from '../package.json';
 import { STORAGE_KEY_RESPONSE_MOCK } from './response-mock/modules/mock/const';
 import { ResponseProject } from './response-mock/modules/mock/types';
+import { STORAGE_KEY_AUTO_GOTO_URL } from '@/modules/auto-goto-url/const';
 
 export default defineContentScript({
   matches: ['*://*/*'],
@@ -31,9 +33,8 @@ const handlePostMessageCallback = async (event: MessageEvent<MessageEventData>) 
     case MESSAGE_EVENT_DATA_ACTION_TYPE.获取响应模拟数据设置:
       let responseMockConfig: ResponseProject | null = null;
       try {
-        // const installSetting: string | null = await storage.getItem(storageKeyForResponseSetting);
         const installConfig: string | null = await storage.getItem(STORAGE_KEY_RESPONSE_MOCK);
-        // console.log(`[${getExtensionName}]: 获取响应模拟数据设置`, installSetting);
+        // console.log(`[${getExtensionName}]: 获取响应模拟数据设置`, installConfig);
         responseMockConfig = installConfig ? JSON.parse(installConfig) : {};
 
         // console.log(
@@ -48,6 +49,19 @@ const handlePostMessageCallback = async (event: MessageEvent<MessageEventData>) 
 
       // 发送异步结果回去
       port?.postMessage({ id, data: responseMockConfig });
+      break;
+    case MESSAGE_EVENT_DATA_ACTION_TYPE.获取自动跳转配置:
+      let autoGotoUrlConfig: AutoGotoUrl | null = null;
+      try {
+        const installConfig: string | null = await storage.getItem(STORAGE_KEY_AUTO_GOTO_URL);
+        // console.log(`[${getExtensionName}]: 获取自动跳转配置`, installConfig);
+        autoGotoUrlConfig = installConfig ? JSON.parse(installConfig) : {};
+      } catch (err) {
+        console.error(`%c[${getExtensionName}]`, pluginStyle, '获取响应模拟数据设置失败', err);
+      }
+
+      // 发送异步结果回去
+      port?.postMessage({ id, data: autoGotoUrlConfig });
       break;
   }
 

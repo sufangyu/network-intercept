@@ -5,9 +5,7 @@ import { ResponseProject, ResponseProjectItem } from '../types';
 import { STORAGE_KEY_RESPONSE_MOCK } from '../const';
 import { responseProject } from '../data';
 
-import { useUpdateStorage } from './use-update-storage';
-
-const { updateStorage } = useUpdateStorage();
+const { updateStorage } = useUpdateStorage<ResponseProject>(STORAGE_KEY_RESPONSE_MOCK);
 
 export function useResponseMockProject() {
   /**

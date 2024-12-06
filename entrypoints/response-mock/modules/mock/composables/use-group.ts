@@ -1,11 +1,11 @@
-import { ElMessage, FormInstance } from 'element-plus';
-import { responseProject } from '../data';
-import type { ResponseGroupItem, ResponseProjectItem } from '../types';
 import { nanoid } from 'nanoid';
 import { cloneDeep } from 'lodash-es';
-import { useUpdateStorage } from './use-update-storage';
+import { ElMessage, FormInstance } from 'element-plus';
+import { responseProject } from '../data';
+import type { ResponseGroupItem, ResponseProject, ResponseProjectItem } from '../types';
+import { STORAGE_KEY_RESPONSE_MOCK } from '../const';
 
-const { updateStorage } = useUpdateStorage();
+const { updateStorage } = useUpdateStorage<ResponseProject>(STORAGE_KEY_RESPONSE_MOCK);
 
 /** 当前激活的分组ID */
 const activeGroupId = ref('');
