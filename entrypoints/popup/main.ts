@@ -10,4 +10,4 @@ import zhCn from 'element-plus/es/locale/lang/zh-cn';
 
 const app = createApp(App);
 
-app.use(ElementPlus, { locale: zhCn, size: 'small' }).mount('#app');
+app.use(i18n).use(ElementPlus, { locale: zhCn, size: 'small' }).mount('#app');

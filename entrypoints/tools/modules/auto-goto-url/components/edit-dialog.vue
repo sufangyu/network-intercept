@@ -1,7 +1,7 @@
 <template>
   <el-dialog v-model="visible" :title="form.id ? '编辑规则' : '添加规则'" width="640">
     <el-form :model="form" ref="formRef" label-width="100">
-      <el-form-item 
+      <el-form-item
         label="名称"
         prop="name"
         :rules="[{ required: true, message: '请输入名称', trigger: 'blur' }]"
@@ -27,8 +27,9 @@
                 </p>
                 <p class="text-xs mb-3 leading-loose">
                   如:
-                  <code class="inline-code">https://link.juejin.cn/?target=https%3A%2F%2Fnuxt.com%2Fmodules%2Fshadcn</code>,
-                  通常配置 <code class="inline-code">https://link.juejin.cn/?</code>
+                  <code class="inline-code"
+                    >https://link.juejin.cn/?target=https%3A%2F%2Fnuxt.com%2Fmodules%2Fshadcn</code
+                  >, 通常配置 <code class="inline-code">https://link.juejin.cn/?</code>
                 </p>
               </template>
             </el-popover>
@@ -54,7 +55,11 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item
-        :label="form.redirectType === AUTO_GOTO_URL_REDIRECT_TYPE_ENUM.目标Key ? '目标Key' : '执行程序'"
+        :label="
+          form.redirectType === AUTO_GOTO_URL_REDIRECT_TYPE_ENUM.目标Key
+            ? '目标Key'
+            : '执行程序'
+        "
         prop="redirect"
         :rules="[{ required: true, message: '不能为空', trigger: 'blur' }]"
       >
@@ -67,26 +72,32 @@
               </template>
               <template #default>
                 <p class="text-xs mb-3 leading-loose">
-                  目标Key: 填<code class="inline-code">URL</code>中目标页面参数的<code class="inline-code">key</code>。
-                  如:<code class="inline-code">https://link.juejin.cn/?target=https%3A%2F%2Fnuxt.com%2Fmodules%2Fshadcn</code>中, 配置 <code class="inline-code">target</code>
+                  目标Key: 填<code class="inline-code">URL</code>中目标页面参数的
+                  <code class="inline-code">key</code>。 如:
+                  <code class="inline-code">
+                    https://link.juejin.cn/?target=https%3A%2F%2Fnuxt.com%2Fmodules%2Fshadcn
+                  </code>
+                  中, 配置 <code class="inline-code">target</code>
                 </p>
 
-                <p class="text-xs mb-3 leading-loose">
-                  执行程序: 填可执行的代码片段, 主要实现获取目标页面连接地址后替换页面地址。如:
+                <div class="text-xs mb-3 leading-loose">
+                  执行程序: 填可执行的代码片段,
+                  主要实现获取目标页面连接地址后替换页面地址。如:
                   <div class="bg-gray-700 p-2 rounded-lg mt-1 leading-normal">
-                    <code >
-                      const link = document.querySelector('.mod-external-link-btn >a').href;
+                    <code>
+                      const link = document.querySelector('.mod-external-link-btn
+                      >a').href;
                       <br />
                       if (!link) {
-                        <br />
+                      <br />
                       &nbsp;&nbsp;return;
-                        <br />
+                      <br />
                       }
                       <br />
                       link && window.location.replace(link);
                     </code>
                   </div>
-                </p>
+                </div>
               </template>
             </el-popover>
           </span>
@@ -132,7 +143,7 @@
 import { ElForm, FormInstance } from "element-plus";
 import { QuestionFilled } from "@element-plus/icons-vue";
 import CodeMirror from "vue-codemirror6";
-import {javascript} from "@codemirror/lang-javascript"
+import { javascript } from "@codemirror/lang-javascript";
 
 import {
   AUTO_GOTO_URL_REDIRECT_TYPE_ENUM,
@@ -140,7 +151,6 @@ import {
 } from "@/modules/auto-goto-url/types";
 import { useAutoGotoUrlConfig } from "@/modules/auto-goto-url/composables";
 import { STATUS_GLOBAL_ENUM } from "@/types";
-
 
 const { createConfig, editConfig } = useAutoGotoUrlConfig();
 

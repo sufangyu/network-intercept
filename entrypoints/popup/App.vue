@@ -71,6 +71,21 @@
           </el-icon>
         </p>
       </div>
+
+      <div class="setting-item">
+        <p>{{ curLanguage }} : {{ t("test") }}</p>
+        <div>
+          <el-button
+            :plain="curLanguage !== lang.code"
+            :type="curLanguage !== lang.code ? 'default' : 'primary'"
+            v-for="lang in languageList"
+            :key="lang.code"
+            @click="changeLanguage(lang.code)"
+          >
+            {{ lang.label }}
+          </el-button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -80,7 +95,10 @@ import { Link } from "@element-plus/icons-vue";
 import { useTheme } from "@/composables/use-theme";
 import { useResponseMockProject } from "@/modules/response-mock/composables";
 import { useHeaderIntercept } from "@/modules/header-intercept/composables";
+import { useLanguage } from "@/composables";
 
+const { t } = useI18n();
+const { curLanguage, languageList, changeLanguage } = useLanguage();
 const { ThemeList, currentTheme, setCurrentTheme } = useTheme();
 
 const {
