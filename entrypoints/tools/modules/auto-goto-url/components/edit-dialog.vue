@@ -117,6 +117,7 @@
             placeholder="请输入"
             v-model.trim="form.redirect"
             basic
+            :phrases="phrasesConfig"
             :lang="javascript()"
           />
         </div>
@@ -144,6 +145,7 @@ import { ElForm, FormInstance } from "element-plus";
 import { QuestionFilled } from "@element-plus/icons-vue";
 import CodeMirror from "vue-codemirror6";
 import { javascript } from "@codemirror/lang-javascript";
+import { useCodeMirror } from "@/composables";
 
 import {
   AUTO_GOTO_URL_REDIRECT_TYPE_ENUM,
@@ -152,6 +154,7 @@ import {
 import { useAutoGotoUrlConfig } from "@/modules/auto-goto-url/composables";
 import { STATUS_GLOBAL_ENUM } from "@/types";
 
+const { phrasesConfig } = useCodeMirror();
 const { createConfig, editConfig } = useAutoGotoUrlConfig();
 
 const visible = ref(false);
@@ -211,6 +214,20 @@ defineExpose({
 
   :deep(.cm-editor) {
     height: 250px;
+  }
+
+  :deep(.cm-panel) {
+    line-height: 1.8;
+
+    @apply dark:bg-[#333338] dark:text-white;
+
+    .cm-textfield {
+      @apply dark:border-[#555] dark:bg-inherit;
+    }
+
+    .cm-button {
+      @apply dark:bg-gradient-to-b dark:from-[#393939] dark:to-[#111];
+    }
   }
 
   :deep(.cm-gutters) {

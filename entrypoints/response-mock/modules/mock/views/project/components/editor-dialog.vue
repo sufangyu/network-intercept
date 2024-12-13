@@ -58,8 +58,8 @@
             placeholder="请输入"
             v-model.trim="form.responseDataBase"
             basic
-            :lang="json()"
-            :linter="form.responseDataBase ? jsonParseLinter() : null"
+            @change="formRef?.validateField('responseDataBase')"
+            :phrases="phrasesConfig"
           />
         </div>
         <p class="text-gray-400">请将需要替换的字段设置为 null</p>
@@ -79,10 +79,11 @@
 import { FormInstance } from "element-plus";
 import { QuestionFilled } from "@element-plus/icons-vue";
 import CodeMirror from "vue-codemirror6";
-import { json, jsonParseLinter } from "@codemirror/lang-json";
+import { useCodeMirror } from "@/composables";
 import { ResponseProjectItem } from "@/modules/response-mock/types";
 import { useResponseMockProject } from "@/modules/response-mock/composables";
 
+const { phrasesConfig, validateByJson5 } = useCodeMirror();
 const { projectForm: form, createProject, editProject } = useResponseMockProject();
 
 const dialogVisible = ref(false);
@@ -94,15 +95,7 @@ const validateResponseBase = (_rule: any, value: string, callback: Function) => 
     callback();
   }
 
-  let error = null;
-  try {
-    const formatVal = JSON.parse(value);
-    const isObj = Object.prototype.toString.call(formatVal) === "[object Object]";
-    !isObj && (error = "请输入正确的JSON格式");
-  } catch (err) {
-    error = (err as Error).message ?? err;
-  }
-
+  const error = validateByJson5(value);
   error ? callback(new Error(error)) : callback();
 };
 
@@ -154,6 +147,20 @@ defineExpose({
 
   :deep(.cm-editor) {
     height: 250px;
+  }
+
+  :deep(.cm-panel) {
+    line-height: 1.8;
+
+    @apply dark:bg-[#333338] dark:text-white;
+
+    .cm-textfield {
+      @apply dark:border-[#555] dark:bg-inherit;
+    }
+
+    .cm-button {
+      @apply dark:bg-gradient-to-b dark:from-[#393939] dark:to-[#111];
+    }
   }
 
   :deep(.cm-gutters) {

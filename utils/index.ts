@@ -1,3 +1,4 @@
+import json5 from 'json5';
 import { name } from '../package.json';
 
 /**
@@ -60,7 +61,8 @@ export const formatObjectTabIndent = (data: string, indenTabIndent = 2) => {
     return data;
   }
 
-  const formatData = JSON.parse(data);
+  const formatData = json5.parse(data);
+  console.log('formatObjectTabIndent =>>', formatData);
   return isObject(formatData) ? JSON.stringify(formatData, null, indenTabIndent) : data;
 };
 

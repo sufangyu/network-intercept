@@ -144,7 +144,7 @@
         prop="responseData"
         :rules="[
           { required: true, message: '返回数据不能为空', trigger: 'blur' },
-          { validator: validateResponseBase, trigger: 'blur' },
+          { validator: validateResponseBase, trigger: ['blur', 'change'] },
         ]"
         style="margin-bottom: 0"
       >
@@ -155,8 +155,8 @@
             placeholder="请输入"
             v-model.trim="form.responseData"
             basic
-            :lang="json()"
-            :linter="form.responseData ? jsonParseLinter() : null"
+            @change="formRef?.validateField('responseData')"
+            :phrases="phrasesConfig"
           />
         </div>
       </el-form-item>
@@ -182,8 +182,8 @@
 import { cloneDeep } from "lodash-es";
 import { FormInstance } from "element-plus";
 import CodeMirror from "vue-codemirror6";
-import { json, jsonParseLinter } from "@codemirror/lang-json";
 import { QuestionFilled } from "@element-plus/icons-vue";
+import { useCodeMirror } from "@/composables";
 import HeadersConfig from "@/components/headers-config.vue";
 import { useResponseMock } from "@/modules/response-mock/composables";
 import {
@@ -202,6 +202,7 @@ const props = withDefaults(defineProps<{ project?: ResponseProjectItem | null, g
   group: null,
 });
 
+const { phrasesConfig, validateByJson5 } = useCodeMirror();
 const { formRef, mockForm: form, createMockRule, editMockRule } = useResponseMock();
 
 const visible = ref(false);
@@ -277,13 +278,8 @@ const validateResponseBase = (_rule: any, value: string, callback: Function) => 
     callback();
   }
 
-  let error = null;
-  try {
-    JSON.parse(value);
-  } catch (err) {
-    error = err;
-  }
-  error ? callback(new Error("请输入正确的JSON格式")) : callback();
+  const error = validateByJson5(value);
+  error ? callback(new Error(error)) : callback();
 };
 
 const open = async (type: ActionType, item?: MockRuleItem) => {
@@ -330,6 +326,20 @@ defineExpose({
 
   :deep(.cm-editor) {
     height: calc(100vh - 290px);
+  }
+
+  :deep(.cm-panel) {
+    line-height: 1.8;
+
+    @apply dark:bg-[#333338] dark:text-white;
+
+    .cm-textfield {
+      @apply dark:border-[#555] dark:bg-inherit;
+    }
+
+    .cm-button {
+      @apply dark:bg-gradient-to-b dark:from-[#393939] dark:to-[#111];
+    }
   }
 
   :deep(.cm-gutters) {
